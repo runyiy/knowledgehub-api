@@ -4,11 +4,11 @@ from app.models.user import User
 from app.core.security import get_password_hash
 from typing import Any
 
+
 def create_user(db: Session, username: str, password: str = "pass12345") -> User:
-    user = User(username=username,
-                hashed_password=get_password_hash(password),
-                is_active=True
-                )
+    user = User(
+        username=username, hashed_password=get_password_hash(password), is_active=True
+    )
     db.add(user)
     db.commit()
     db.refresh(user)

@@ -1,4 +1,10 @@
-from tests.helpers import create_user, login_and_get_token, create_post_api, auth_headers
+from tests.helpers import (
+    create_user,
+    login_and_get_token,
+    create_post_api,
+    auth_headers,
+)
+
 
 def test_get_post_public_anonymous_ok(client, db_session):
     create_user(db_session, username="alice", password="12345678")
