@@ -2,28 +2,21 @@
 import os
 
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
-from fastapi.testclient import TestClient
 from alembic import command
 from alembic.config import Config
-from dotenv import load_dotenv
+from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, sessionmaker
 
-from app.main import app
 from app.api.deps import get_db
-
-
-@pytest.fixture(scope="session", autouse=True)
-def load_test_env():
-    load_dotenv(".env.test", override=True)
-    # ensure env is loaded
-    assert os.getenv("DATABASE_URL"), "DATABASE_URL not set"
+from app.main import app
 
 
 @pytest.fixture(scope="session")
-def test_database_url(load_test_env) -> str:
-    # ensure reading this url after env loaded
-    return os.environ["DATABASE_URL"]
+def test_database_url() -> str:
+    url = os.getenv("DATABASE_URL")
+    assert url, "DATABASE_URL not set. Did you forget to set ENV_FILE=.env.test?"
+    return url
 
 
 @pytest.fixture(scope="session")

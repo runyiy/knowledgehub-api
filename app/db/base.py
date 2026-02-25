@@ -1,3 +1,4 @@
-from sqlalchemy.orm import declarative_base
+from app.db.base_class import Base  # noqa: F401
 
-Base = declarative_base()
+from app.models.post import Post  # noqa: F401
+from app.models.user import User  # noqa: F401
