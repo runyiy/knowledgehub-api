@@ -56,15 +56,10 @@ pip install -r requirements-dev.txt
 ### Environment Variables
 - Create a .env file in the project root:
 ```env
-DATABASE_URL=sqlite:///./dev.db
+DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/knowledgehub
 JWT_SECRET_KEY=change-me
 JWT_ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
-```
-
-- If using PostgreSQL:
-```bash
-DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/knowledgehub
 ```
 
 ## Database Migration
@@ -124,7 +119,8 @@ curl "http://127.0.0.1:8000/api/posts?limit=10&offset=0"
 
 ## Running Tests
 ```bash
-pytest
+$env:ENV_FILE=".env.test"
+python -m pytest
 ```
 ## Code Quality
 ```bash
